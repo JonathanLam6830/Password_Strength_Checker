@@ -5,7 +5,10 @@ This is a Cybersecurity tool that utlizes python in order to analyze password st
 ## Features
 
 - Checks the password length
-- Detects any uppercase letters
+- Detects uppercase letters
+- Detects lowercase letters
+- Detects numbers
+- Detects special characters
 - Provides security feedback
 
 ## Technologies
@@ -14,7 +17,6 @@ This is a Cybersecurity tool that utlizes python in order to analyze password st
 
 ## Future improvements
 
-- Lowercase detection
 - Password scoring system
 - Password generator
 - User interface
