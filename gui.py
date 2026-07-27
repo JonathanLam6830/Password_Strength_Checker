@@ -15,8 +15,10 @@ window.geometry("500x350")
 label = tk.Label(window, text="Enter a password:")
 label.grid(row=0, column=0)
 
-entry = tk.Entry(window, width=30)
+entry = tk.Entry(window, width=30, show="*")
 entry.grid(row=1, column=0)
+
+show_password = tk.BooleanVar()
 
 def check_password():
     password = entry.get()
@@ -47,13 +49,19 @@ def check_password():
         strength = "Strong"
     
     result_label.config(
-        text=f"Password Strength: {score}/5\n\n{feedback}"
+        text=f"Password Strength: {strength} ({score}/5)\n\n{feedback}"
     )
 
 def generate_new_password():
     new_password = generate_password()
     entry.delete(0, tk.END)
     entry.insert(0, new_password)
+
+def toggle_password():
+    if show_password.get():
+        entry.config(show="")
+    else:
+        entry.config(show="*")
 
 result_label = tk.Label(window, text="")
 result_label.grid(row=3, column=0, pady=10)
@@ -64,7 +72,7 @@ button = tk.Button(
     text="Check Password",
     command=check_password
 )
-button.grid(row=2, column=0)
+button.grid(row=4, column=0, pady=5)
 
 # Generate Password Button
 generate_button = tk.Button(
@@ -72,7 +80,15 @@ generate_button = tk.Button(
     text="Generate Strong Password",
     command=generate_new_password
 )
+generate_button.grid(row=5, column=0, pady=5)
+# Show password Checkbox
+show_button = tk.Checkbutton(
+    window,
+    text="Show Password",
+    variable=show_password,
+    command=toggle_password
+)
 
-generate_button.grid(row=4, column=0, pady=10)
+show_button.grid(row=2, column=0)
 
 window.mainloop()
