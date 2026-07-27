@@ -1,6 +1,6 @@
 # Password Strength Checker
 
-This is a Cybersecurity tool that utlizes python in order to analyze password strength based upon security practices that are common in an ever-changing world.
+This is a Cybersecurity tool that utilizes python in order to analyze password strength based upon security practices that are common in an ever-changing world.
 
 ## Features
 
@@ -9,7 +9,9 @@ This is a Cybersecurity tool that utlizes python in order to analyze password st
 - Detects lowercase letters
 - Detects numbers
 - Detects special characters
-- Provides security feedback
+- Detects commonly used passwords
+- Calculates a password strength score out of 5
+- Provides suggestions for improving password security
 
 ## Technologies
 
@@ -19,7 +21,7 @@ This is a Cybersecurity tool that utlizes python in order to analyze password st
 
 - Password generator
 - User interface
-
+- Password entropy calculation
 ## Author
 
  Jonathan Lam

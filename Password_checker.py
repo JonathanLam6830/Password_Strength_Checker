@@ -1,5 +1,5 @@
 import string
-
+import random
 # Functions that check password characteristics
 def check_uppercase(password):
     return any(char.isupper() for char in password)
@@ -26,6 +26,16 @@ def calculate_score(password):
     if len(password) >= 8:
         score += 1
     return score
+
+def generate_password(length=12):
+    characters= string.ascii_letters + string.digits + string.punctuation
+
+    password = ""
+
+    for i in range(length):
+        password += random.choice(characters)
+
+    return password
 
 is_common_password = False
 # List of frequently used passwords that should be avoided
@@ -65,3 +75,8 @@ elif score <=4:
     print("Your password is medium. You can improve it by adding more character types or increasing its length.")
 else:
     print("Your password is strong. Good job!")
+
+choice = input("Would you like to generate a stronger password suggestion? (yes/no): ")
+
+if choice.lower() == "yes":
+    print("Suggested password: ", generate_password())
