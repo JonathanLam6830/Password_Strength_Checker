@@ -1,10 +1,31 @@
 import string
 
-score = 0
-has_uppercase = False
-has_lowercase = False
-has_number = False
-has_special = False
+def check_uppercase(password):
+    return any(char.isupper() for char in password)
+
+def check_lowercase(password):
+    return any(char.islower() for char in password)
+
+def check_number(password):
+    return any(char.isdigit() for char in password)
+
+def check_special(password):
+    return any(char in string.punctuation for char in password)
+
+def calculate_score(password):
+    score = 0
+    if check_uppercase(password):
+        score += 1
+    if check_lowercase(password):
+        score += 1
+    if check_number(password):
+        score += 1
+    if check_special(password):
+        score += 1
+    if len(password) >= 8:
+        score += 1
+    return score
+
 is_common_password = False
 
 common_passwords = ["password", "123456", "qwerty", "admin", "letmein", "welcome"]
@@ -12,36 +33,18 @@ print("Password Strength Checker")
 
 password = input("Enter a password: ")
 
+has_uppercase = check_uppercase(password)
+has_lowercase = check_lowercase(password)
+has_number = check_number(password)
+has_special = check_special(password)
+
 if password.lower() in common_passwords:
     is_common_password = True
     print("WARNING: This password is commonly used and is not secure because it is easy to guess.")
 
-#Checks if the password has at least one uppercase and/or lowercase letter
-for char in password:
-    if char.isupper():
-        has_uppercase = True
-    if char.islower():
-        has_lowercase = True
-    if char.isdigit():
-        has_number = True
-    if char in string.punctuation:
-        has_special = True
+score = calculate_score(password)
 
-if has_uppercase:
-    score += 1
-    print("Your password has an uppercase letter, which is good for security.")
-if has_lowercase:
-    score += 1
-    print("Your password has a lowercase letter, which is good for security.")
-if has_number:
-    score += 1
-    print("Your password has a number, which is good for security.")
-if has_special:
-    score += 1
-    print("Your password has a special character, which is good for security.")
-if len(password) >= 8:
-    score += 1
-    print("Your password is at least 8 characters long, which is good for security.")
+print(f"Your password has a strength score of {score}/5.")
 
 #Gives suggestions for what is missing in the password to make it stronger
 if not has_uppercase:
@@ -54,8 +57,6 @@ if not has_special:
     print("Consider adding a special character")
 if len(password) < 8:
     print("Consider making your password at least 8 characters long")
-
-print(f"Your password has a strength score of {score}/5.")
 
 if score <= 2:
     print("Your password is weak. Consider making it stronger by adding more character types and increasing its length.")
