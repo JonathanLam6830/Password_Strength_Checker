@@ -1,5 +1,6 @@
 import string
 
+# Functions that check password characteristics
 def check_uppercase(password):
     return any(char.isupper() for char in password)
 
@@ -27,7 +28,7 @@ def calculate_score(password):
     return score
 
 is_common_password = False
-
+# List of frequently used passwords that should be avoided
 common_passwords = ["password", "123456", "qwerty", "admin", "letmein", "welcome"]
 print("Password Strength Checker")
 

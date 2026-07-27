@@ -17,7 +17,6 @@ This is a Cybersecurity tool that utlizes python in order to analyze password st
 
 ## Future improvements
 
-- Password scoring system
 - Password generator
 - User interface
 
