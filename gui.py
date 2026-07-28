@@ -67,11 +67,31 @@ def check_password():
     )
 
 def generate_new_password():
-    new_password = generate_password()
+    length = length_slider.get()
+
+    new_password = generate_password(length)
+
     entry.delete(0, tk.END)
     entry.insert(0, new_password)
 
     check_password()
+
+def copy_password():
+    password = entry.get()
+
+    if password:
+        window.clipboard_clear()
+        window.clipboard_append(password)
+
+        result_label.config(
+            text="📋 Password copied to clipboard!",
+            fg="blue"
+        )
+    else:
+        result_label.config(
+            text="⚠️ No password to copy.",
+            fg="red"
+        )
 
 def toggle_password():
     if show_password.get():
@@ -80,7 +100,7 @@ def toggle_password():
         entry.config(show="*")
 
 result_label = tk.Label(window, text="")
-result_label.grid(row=4, column=0, padx=20, pady=10)
+result_label.grid(row=9, column=0, padx=20, pady=15)
 
 # Check Password Button
 button = tk.Button(
@@ -88,7 +108,7 @@ button = tk.Button(
     text="Check Password",
     command=check_password
 )
-button.grid(row=5, column=0, pady=5)
+button.grid(row=6, column=0, pady=5)
 
 # Generate Password Button
 generate_button = tk.Button(
@@ -96,7 +116,15 @@ generate_button = tk.Button(
     text="Generate Secure Password",
     command=generate_new_password
 )
-generate_button.grid(row=6, column=0, pady=5)
+generate_button.grid(row=7, column=0, pady=5)
+
+copy_button = tk.Button(
+    window,
+    text="Copy Password",
+    command= copy_password
+)
+copy_button.grid(row=8, column=0, pady=5)
+
 # Show password Checkbox
 show_button = tk.Checkbutton(
     window,
@@ -107,4 +135,16 @@ show_button = tk.Checkbutton(
 
 show_button.grid(row=3, column=0, pady=5)
 
+length_label = tk.Label(window, text="Password Length")
+length_label.grid(row=4, column=0, pady=(10,0))
+
+length_slider = tk.Scale(
+    window,
+    from_=8,
+    to=32,
+    orient="horizontal"
+)
+length_slider.set(12)
+
+length_slider.grid(row=5, column=0)
 window.mainloop()

@@ -58,4 +58,3 @@ def generate_password(length=12):
 
     # Converts the list into a string
     return "".join(password)
-

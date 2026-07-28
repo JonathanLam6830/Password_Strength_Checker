@@ -19,8 +19,6 @@ This is a Cybersecurity tool that utilizes python in order to analyze password s
 
 ## Future improvements
 
-- Password generator
-- User interface
 - Password entropy calculation
 ## Author
 
