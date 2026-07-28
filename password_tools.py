@@ -29,12 +29,33 @@ def calculate_score(password):
     return score
 
 def generate_password(length=12):
-    characters= string.ascii_letters + string.digits + string.punctuation
 
-    password = ""
+    # Makes sure the password is at least 4 characters long
+    if length < 4:
+        length = 4
 
-    for i in range(length):
-        password += random.choice(characters)
+    # Starts with one character from each required category
+    password = [
+        random.choice(string.ascii_uppercase),
+        random.choice(string.ascii_lowercase),
+        random.choice(string.digits),
+        random.choice(string.punctuation)
+    ]
 
-    return password
+    # Pool of all possible characters
+    all_characters = (
+        string.ascii_letters +
+        string.digits +
+        string.punctuation
+    )
+
+    # Fills the rest of the password randomly
+    while len(password) < length:
+        password.append(random.choice(all_characters))
+
+    # Shuffles so the required characters aren't always first
+    random.shuffle(password)
+
+    # Converts the list into a string
+    return "".join(password)
 
